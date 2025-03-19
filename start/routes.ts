@@ -17,3 +17,4 @@ router.get('/', async () => {
 })
 
 router.post('/authors', [AuthorsController, 'create'])
+router.get('/authors', [AuthorsController, 'all'])
