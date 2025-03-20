@@ -7,7 +7,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class AuthorsController {
     constructor(protected author: AuthorService) { }
     async create({ request }: HttpContext) {
-        const data = request.all()
+        const data = request.body()
         const payload = await createAuthorValidator.validate(data)
 
         this.author.create(payload)
