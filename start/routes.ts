@@ -16,4 +16,5 @@ router.group(() => {
   router.get('/', [AuthorsController, 'all'])
   router.get('/:id', [AuthorsController, 'index'])
   router.patch('/:id', [AuthorsController, 'update'])
+  router.delete('/:id', [AuthorsController, 'delete'])
 }).prefix('/author')

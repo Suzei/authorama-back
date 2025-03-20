@@ -37,4 +37,10 @@ export default class AuthorsController {
 
         await this.author.update(id, payload!)
     }
+
+    async delete({ request, response }: HttpContext) {
+        const id = request.param('id')
+        await this.author.delete(id)
+        response.status(200).json({ message: 'Item excluído com sucesso.' })
+    }
 }
