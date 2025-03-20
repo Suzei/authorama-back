@@ -1,5 +1,5 @@
-import { AuthorService } from '#services/author/CreateAuthorService';
-import { createAuthorValidator } from '#validators/author';
+import { AuthorService } from '#services/author/AuthorService';
+import { createAuthorValidator, editAuthorValidator } from '#validators/author';
 import { inject } from '@adonisjs/core';
 import type { HttpContext } from '@adonisjs/core/http'
 
@@ -17,10 +17,24 @@ export default class AuthorsController {
     async all({ request, response }: HttpContext) {
         if (request.qs()) {
             const authors = await this.author.all(request.qs())
-            console.log(authors)
             return response.json(authors)
         }
         const authors = await this.author.all()
         return response.json(authors)
+    }
+
+    async index({ request, response }: HttpContext) {
+        const id = request.param('id')
+        const author = await this.author.index(id)
+
+        return response.json(author)
+    }
+
+    async update({ request }: HttpContext) {
+        const id = request.param('id')
+        const author = request.body()
+        const payload = await editAuthorValidator.validate(author)
+
+        await this.author.update(id, payload!)
     }
 }
