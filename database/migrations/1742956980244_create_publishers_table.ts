@@ -1,19 +1,16 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'authors'
+  protected tableName = 'publishers'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id').primary()
-      table.string('avatar_url').nullable()
-      table.string('cpf').nullable()
-      table.boolean('indie').nullable().defaultTo(true)
-      table.timestamp('age').nullable()
+      table.increments('id')
+      table.string('name')
+      table.string('cnpj').nullable()
 
       table.timestamp('created_at')
       table.timestamp('updated_at')
-
     })
   }
 

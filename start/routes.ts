@@ -8,6 +8,7 @@
 */
 
 import AuthorsController from '#controllers/authors_controller'
+import PublisherController from '#controllers/publisher_controller'
 import router from '@adonisjs/core/services/router'
 
 
@@ -18,3 +19,8 @@ router.group(() => {
   router.patch('/:id', [AuthorsController, 'update'])
   router.delete('/:id', [AuthorsController, 'delete'])
 }).prefix('/author')
+
+
+router.group(() => {
+  router.post('/', [PublisherController, 'create'])
+}).prefix('/publisher')

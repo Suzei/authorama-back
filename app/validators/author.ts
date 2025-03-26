@@ -7,6 +7,7 @@ export const createAuthorValidator = vine.compile(
         age: vine.date().nullable().optional(),
         avatar_url: vine.string().url().optional().nullable(),
         indie: vine.boolean(),
+        publisher_id: vine.number()
     })
 )
 
