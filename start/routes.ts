@@ -23,4 +23,5 @@ router.group(() => {
 
 router.group(() => {
   router.post('/', [PublisherController, 'create'])
+  router.patch('/', [PublisherController, 'update'])
 }).prefix('/publisher')

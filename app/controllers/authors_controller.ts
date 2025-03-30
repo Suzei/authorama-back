@@ -1,14 +1,15 @@
+import Author from '#models/author';
 import { AuthorService } from '#services/author/AuthorService';
 import { createAuthorValidator, editAuthorValidator } from '#validators/author';
 import { inject } from '@adonisjs/core';
-import type { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 
 @inject()
 export default class AuthorsController {
     constructor(protected author: AuthorService) { }
     async create({ request }: HttpContext) {
         const data = request.body()
-        const payload = await createAuthorValidator.validate(data)
+        const payload = await createAuthorValidator.validate(data) as Author
 
         this.author.create(payload)
 
@@ -25,9 +26,12 @@ export default class AuthorsController {
 
     async index({ request, response }: HttpContext) {
         const id = request.param('id')
+        if (!id) {
+            throw new Error("Id não especificado")
+        }
         const author = await this.author.index(id)
-
         return response.json(author)
+
     }
 
     async update({ request }: HttpContext) {
